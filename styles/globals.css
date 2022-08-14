@@ -2,6 +2,8 @@ html,
 body {
   padding: 0;
   margin: 0;
+  color: var(--color-fore-primary);
+  background-color: var(--color-back-primary);
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
@@ -15,12 +17,23 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+:root {
+  --color-fore-primary: #555555;
+  --color-fore-accent: #3f4238;
+
+  --color-back-primary: #f3f3f3;
+  --color-back-accent: #ffe8d6;
+}
+
+@layer base {
+  .f2 {
+    @apply text-[32px] md:text-[48px] tracking-[2px] leading-[1.3rem] my-[10px];
   }
-  body {
-    color: white;
-    background: black;
+  .f3 {
+    @apply text-[24px] tracking-[2px] leading-[40px] my-[10px];
   }
 }
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
