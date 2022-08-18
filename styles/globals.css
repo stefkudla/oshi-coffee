@@ -33,6 +33,11 @@ a {
     @apply text-[24px] tracking-[2px] leading-[40px] my-[10px];
   }
 }
+@layer components {
+  .nav-item {
+    @apply text-sm uppercase tracking-wider md:tracking-wide md:hover:text-slate-900 transition-colors py-3 md:py-0 border-t border-b md:border-0;
+  }
+}
 
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
