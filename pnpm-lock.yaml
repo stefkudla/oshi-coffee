@@ -5,6 +5,7 @@ specifiers:
   '@types/react': 18.0.17
   '@types/react-dom': 18.0.6
   autoprefixer: ^10.4.8
+  classnames: ^2.3.1
   eslint: 8.22.0
   eslint-config-next: 12.2.5
   eslint-config-prettier: ^8.5.0
@@ -17,6 +18,7 @@ specifiers:
   typescript: 4.7.4
 
 dependencies:
+  classnames: 2.3.1
   next: 12.2.5_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -28,7 +30,7 @@ devDependencies:
   autoprefixer: 10.4.8_postcss@8.4.16
   eslint: 8.22.0
   eslint-config-next: 12.2.5_4rv7y5c6xz3vfxwhbrcxxi73bq
-  eslint-config-prettier: 8.5.0
+  eslint-config-prettier: 8.5.0_eslint@8.22.0
   postcss: 8.4.16
   prettier: 2.7.1
   tailwindcss: 3.1.8
@@ -557,6 +559,10 @@ packages:
       fsevents: 2.3.2
     dev: true
 
+  /classnames/2.3.1:
+    resolution: {integrity: sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==}
+    dev: false
+
   /color-convert/2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
     engines: {node: '>=7.0.0'}
@@ -776,11 +782,13 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-config-prettier/8.5.0:
+  /eslint-config-prettier/8.5.0_eslint@8.22.0:
     resolution: {integrity: sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==}
     hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
+    dependencies:
+      eslint: 8.22.0
     dev: true
 
   /eslint-import-resolver-node/0.3.6:
