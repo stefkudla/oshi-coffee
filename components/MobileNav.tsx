@@ -1,50 +1,67 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import autoAnimate from '@formkit/auto-animate'
+
 import logo from '../public/images/oshi-logo-trans-bg.png'
 import Link from 'next/link'
 import Image from 'next/image'
 import classNames from 'classnames'
 
-function NavItem({ title, path }: { title: string; path: string }) {
-  const [toggleItem, setToggleItem] = useState(false)
-  const handleToggle = () => {
-    setToggleItem(!toggleItem)
-  }
+const NavItem = ({ title, path }: { title: string; path: string }) => {
+  const [show, setShow] = useState(false)
+  const parent = useRef(null)
+
+  useEffect(() => {
+    parent.current && autoAnimate(parent.current)
+  }, [parent])
+
+  const reveal = () => setShow(!show)
+
   return (
-    <li className="nav-item flex justify-between items-center pl-4 pr-2">
-      <Link href={path} key="shop">
-        <a>{title}</a>
-      </Link>
-      <button
-        onClick={handleToggle}
-        aria-label={!toggleItem ? 'Expand Arrow' : 'Collapse Arrow'}
-        title={!toggleItem ? 'Expand Arrow' : 'Collapse Arrow'}
-        className={!toggleItem ? '' : 'rotate-180'}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
-          viewBox="0 0 20 20"
-          fill="currentColor"
+    <div ref={parent}>
+      <li className="nav-item flex justify-between items-center pl-4 pr-2 border-b">
+        <Link href={path} key="shop">
+          <a>{title}</a>
+        </Link>
+        <button
+          onClick={reveal}
+          aria-label={!show ? 'Expand Arrow' : 'Collapse Arrow'}
+          title={!show ? 'Expand Arrow' : 'Collapse Arrow'}
+          className={classNames('transition-transform', show && 'rotate-180')}
         >
-          <path
-            fillRule="evenodd"
-            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-            clipRule="evenodd"
-          />
-        </svg>
-      </button>
-    </li>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </button>
+      </li>
+      {show && (
+        <p className="p-2">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ad harum
+          maxime quasi ipsa? Laboriosam, dolorum quas, velit nemo a officiis
+          voluptate voluptatibus quae architecto dolorem sunt eius, magni
+          ratione.
+        </p>
+      )}
+    </div>
   )
 }
 
 const MobileNav: React.FC = () => {
   const [navOpen, setNavOpen] = useState(false)
-  const handleMenu = () => {
+  const reveal = () => {
     setNavOpen(!navOpen)
   }
   return (
     <div className="w-full h-12 bg-back-accent flex md:hidden items-center justify-between py-8 px-3 border-b-fore-accent border-b">
-      <button onClick={handleMenu} aria-label="Open menu" title="Menu Icon">
+      <button onClick={reveal} aria-label="Open menu" title="Menu Icon">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-7 w-7"
@@ -90,7 +107,7 @@ const MobileNav: React.FC = () => {
         >
           <div className="relative w-56 h-full bg-white z-50">
             <button
-              onClick={handleMenu}
+              onClick={reveal}
               aria-label="Close Menu"
               title="Menu Icon"
               className={classNames(
